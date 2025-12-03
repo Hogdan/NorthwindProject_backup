@@ -1,0 +1,40 @@
+@model Product
+<div class="container-xxl">
+  <h2 class="my-3"><i class="fas fa-edit"></i> Edit Product</h2>
+  <form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="ProductId" />
+    <div class="form-group">
+      <label asp-for="ProductName"></label>
+      <input asp-for="ProductName" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label asp-for="CategoryId">Category</label>
+      <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
+    </div>
+    <div class="form-group">
+      <label asp-for="QuantityPerUnit"></label>
+      <input asp-for="QuantityPerUnit" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label asp-for="UnitPrice"></label>
+      <input asp-for="UnitPrice" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label asp-for="UnitsInStock"></label>
+      <input asp-for="UnitsInStock" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label asp-for="UnitsOnOrder"></label>
+      <input asp-for="UnitsOnOrder" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label asp-for="ReorderLevel"></label>
+      <input asp-for="ReorderLevel" class="form-control" />
+    </div>
+    <div class="form-group form-check">
+      <input asp-for="Discontinued" class="form-check-input" />
+      <label asp-for="Discontinued" class="form-check-label"></label>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>
