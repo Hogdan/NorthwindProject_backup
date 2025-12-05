@@ -30,12 +30,26 @@ namespace Northwind.Controllers
         [HttpPost, Route("api/addtocart")]
         // adds a row to the cartitem table
         public CartItem Post([FromBody] CartItemJSON cartItem) => _dataContext.AddToCart(cartItem);
-        [HttpPost, Route("api/addproduct")]
-        // adds a new product
-        public Product Post([FromBody] Product product)
-        {
-          _dataContext.AddProduct(product);
-          return product;
-        }
+        
+        [HttpPost, Route("api/editproduct")]
+        // updates an existing product
+        public void Post([FromBody] Product product) => _dataContext.EditProduct(product);
+        
+        // inventory methods
+        [HttpGet, Route("api/category/{CategoryId}/product/discontinued/false/out-of-stock")]
+        public IEnumerable<Product> GetInventoryOutOfStock(int CategoryId) =>
+            _dataContext.Products.Where(p => p.CategoryId == CategoryId && p.Discontinued == false && p.UnitsInStock == 0)
+            .OrderBy(p => p.ProductName);
+
+        [HttpGet, Route("api/category/{CategoryId}/product/discontinued/false/needs-reorder")]
+        public IEnumerable<Product> GetInventoryNeedsReorder(int CategoryId) =>
+            _dataContext.Products.Where(p => p.CategoryId == CategoryId && p.Discontinued == false && p.UnitsInStock <= p.ReorderLevel)
+            .OrderBy(p => p.ProductName);
+
+        [HttpGet, Route("api/category/{CategoryId}/product/discontinued/false/out-of-stock/needs-reorder")]
+        public IEnumerable<Product> GetInventoryOutOfStockNeedsReorder(int CategoryId) =>
+            _dataContext.Products.Where(p => p.CategoryId == CategoryId && p.Discontinued == false && (p.UnitsInStock == 0 || p.UnitsInStock <= p.ReorderLevel))
+            .OrderBy(p => p.ProductName);
+
     }
 }

@@ -84,3 +84,42 @@ body {
 {
   color: red;
 }
+/* Inventory status colors */
+.discontinued {
+  opacity: .5;
+}
+
+.out-of-stock {
+  background-color: #f69ca3;
+}
+
+.need-reorder {
+  background-color: #fce69f;
+}
+
+#product_rows tr {
+  cursor: pointer;
+}
+
+#product_rows tr.out-of-stock td {
+  background-color: #f69ca3;
+}
+
+#product_rows tr.need-reorder td {
+  background-color: #fce69f;
+}
+
+.table-hover tbody tr:hover td {
+  background-color: #d1ecf1;
+}
+
+#oos {
+  background-color: #f69ca3;
+  padding: 5px;
+  border-radius: 5px;
+}
+#nro {
+  background-color: #fce69f;
+  padding: 5px;
+  border-radius: 5px;
+}
